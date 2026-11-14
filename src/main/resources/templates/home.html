@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Dashboard')}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container">
+    <h1>Welcome, <span sec:authentication="name">user</span></h1>
+    <div class="grid">
+        <a class="card tile" th:href="@{/admins}" sec:authorize="hasRole('ADMIN')">
+            <h2>Admin Panel</h2><p>Manage administrators</p>
+        </a>
+        <a class="card tile" th:href="@{/teachers}" sec:authorize="hasAnyRole('ADMIN','TEACHER')">
+            <h2>Teacher Panel</h2><p>Manage teachers</p>
+        </a>
+        <a class="card tile" th:href="@{/students}" sec:authorize="hasAnyRole('ADMIN','STUDENT')">
+            <h2>Student Panel</h2><p>Manage students</p>
+        </a>
+    </div>
+</main>
+</body>
+</html>

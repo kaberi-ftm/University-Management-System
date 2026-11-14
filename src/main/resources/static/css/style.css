@@ -1,0 +1,42 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background: #f3f5f9; color: #1f2937; }
+a { color: inherit; text-decoration: none; }
+
+.navbar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+          padding: 12px 24px; background: #1e3a8a; color: #fff; }
+.navbar .brand { font-weight: 700; font-size: 18px; }
+.nav-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.nav-links a:hover { text-decoration: underline; }
+.who { font-size: 13px; opacity: .85; }
+
+.container { max-width: 960px; margin: 24px auto; padding: 0 16px; }
+.container.narrow { max-width: 460px; }
+.card { background: #fff; border-radius: 8px; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.tile:hover { box-shadow: 0 3px 10px rgba(0,0,0,.18); }
+.tile h2 { margin: 0 0 6px; }
+.tile p { margin: 0; color: #6b7280; }
+
+.toolbar { display: flex; align-items: center; justify-content: space-between; }
+table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e5e7eb; font-size: 14px; }
+th { background: #e8edf7; }
+td.empty { text-align: center; color: #6b7280; }
+td.actions { white-space: nowrap; }
+
+label { display: block; margin: 14px 0 4px; font-weight: 600; font-size: 14px; }
+input[type=text], input[type=password] { width: 100%; padding: 9px 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+.form-actions { margin-top: 20px; display: flex; gap: 8px; }
+.muted, .hint { color: #6b7280; font-weight: 400; font-size: 12px; }
+.field-error { color: #b91c1c; font-size: 12px; margin: 4px 0 0; }
+
+.btn { display: inline-block; padding: 8px 14px; border: 0; border-radius: 6px; cursor: pointer; font-size: 14px; }
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-secondary { background: #e5e7eb; color: #111827; }
+.btn-danger { background: #dc2626; color: #fff; }
+form.inline { display: inline; }
+
+.alert { padding: 10px 14px; border-radius: 6px; margin: 12px 0; font-size: 14px; }
+.alert-success { background: #dcfce7; color: #166534; }
+.alert-error { background: #fee2e2; color: #991b1b; }

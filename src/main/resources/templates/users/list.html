@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head(${title})}"></head>
+<body>
+<nav th:replace="~{fragments/layout :: navbar}"></nav>
+<main class="container">
+    <div class="toolbar">
+        <h1 th:text="${title}">Users</h1>
+        <a class="btn btn-primary" th:href="@{${basePath} + '/new'}" th:text="'+ Add ' + ${singular}">Add</a>
+    </div>
+
+    <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+    <div class="alert alert-error" th:if="${error}" th:text="${error}"></div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th><th>Username</th><th>Full name</th><th>Email</th><th>Department</th><th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="u : ${users}">
+            <td th:text="${u.id}">1</td>
+            <td th:text="${u.username}">user</td>
+            <td th:text="${u.fullName}">Name</td>
+            <td th:text="${u.email}">mail</td>
+            <td th:text="${u.department}">dept</td>
+            <td class="actions">
+                <a class="btn btn-secondary" th:href="@{${basePath} + '/' + ${u.id} + '/edit'}">Edit</a>
+                <form th:action="@{${basePath} + '/' + ${u.id} + '/delete'}" method="post" class="inline"
+                      onsubmit="return confirm('Delete this record?');">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(users)}">
+            <td colspan="6" class="empty">No records yet.</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
