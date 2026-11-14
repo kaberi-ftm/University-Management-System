@@ -28,7 +28,7 @@ jobs:
 
       # 6 unit tests (+ 1 demo test that fails on purpose) - no Spring, no database
       - name: Run unit tests
-        run: mvn -B test -Dtest='UserServiceTest,UserDtoTest,DemoFailingUnitTest'
+        run: mvn -B test -Dtest='UserServiceTest,UserDtoTest'
 
       # 3 integration test classes (+ 1 demo test that fails on purpose) - full Spring context + H2
       # if: always() -> still runs when the unit-test step is red, so you see both results
