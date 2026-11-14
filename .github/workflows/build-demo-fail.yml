@@ -1,0 +1,44 @@
+name: Demo - Failing Tests (Build Failure)
+
+# DEMO ONLY: includes the tests that fail on purpose, so this workflow ends RED.
+# It runs only when you press "Run workflow" in the Actions tab (it does not run on every push).
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  demo-failing-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: maven
+
+      - name: Compile (no tests)
+        run: mvn -B -DskipTests compile
+
+      # 6 unit tests + DemoFailingUnitTest (fails on purpose)
+      - name: Run unit tests (includes demo failure)
+        run: mvn -B test -Dtest='UserServiceTest,UserDtoTest,DemoFailingUnitTest'
+
+      # integration tests + DemoFailingIntegrationTest (fails on purpose)
+      # if: always() -> still runs when the unit-test step is red
+      - name: Run integration tests (includes demo failure)
+        if: always()
+        run: mvn -B test -Dtest='*IntegrationTest'
+
+      - name: Upload test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: surefire-reports-demo-fail
+          path: target/surefire-reports/
+          if-no-files-found: ignore

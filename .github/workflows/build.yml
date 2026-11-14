@@ -1,10 +1,10 @@
-name: Build and Test
+name: Build and Test (Success)
 
 on:
   push:
     branches: [ main ]
   pull_request:
-  workflow_dispatch:        # lets you press "Run workflow" manually in the Actions tab
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -26,15 +26,14 @@ jobs:
       - name: Compile (no tests)
         run: mvn -B -DskipTests compile
 
-      # 6 unit tests (+ 1 demo test that fails on purpose) - no Spring, no database
+      # 6 unit tests - no Spring, no database
       - name: Run unit tests
         run: mvn -B test -Dtest='UserServiceTest,UserDtoTest'
 
-      # 3 integration test classes (+ 1 demo test that fails on purpose) - full Spring context + H2
-      # if: always() -> still runs when the unit-test step is red, so you see both results
+      # 3 integration test classes - full Spring context + H2
+      # demo-fail tests are excluded here, so this workflow ends green
       - name: Run integration tests
-        if: always()
-        run: mvn -B test -Dtest='*IntegrationTest'
+        run: mvn -B test -Dtest='*IntegrationTest' -DexcludedGroups=demo-fail
 
       - name: Upload test reports
         if: always()
