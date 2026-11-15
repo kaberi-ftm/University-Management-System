@@ -13,14 +13,7 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * DEMO ONLY - this test FAILS ON PURPOSE (requested by the teacher to show a red pipeline).
- *
- * To make the pipeline green again do ONE of these:
- *   1. delete this file (and DemoFailingUnitTest.java), or
- *   2. change isOk() to isForbidden() below, or
- *   3. run Maven with  -DexcludedGroups=demo-fail
- */
+
 @Tag("demo-fail")
 @SpringBootTest
 @AutoConfigureMockMvc

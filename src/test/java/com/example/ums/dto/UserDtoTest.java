@@ -16,10 +16,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * UNIT TESTS (5-6) - DTO behaviour: bean-validation rules and entity -> response mapping.
- * Plain Java, no Spring context.
- */
+
 class UserDtoTest {
 
     private static ValidatorFactory factory;

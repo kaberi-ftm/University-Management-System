@@ -50,7 +50,7 @@ class ApiCrudIntegrationTest {
     @Test
     @DisplayName("Integration 1: admin can create, read, update and delete a teacher through /api/teachers")
     void adminCrudLifecycle_persistsChangesInDatabase() throws Exception {
-        // ---- CREATE -> 201 + Location header, password hash never returned
+        // ---- CREATE
         MvcResult created = mockMvc.perform(post("/api/teachers")
                         .with(httpBasic("admin", "admin123"))
                         .contentType(MediaType.APPLICATION_JSON)
@@ -62,7 +62,7 @@ class ApiCrudIntegrationTest {
                 .andExpect(jsonPath("$.password").doesNotExist())
                 .andReturn();
 
-        // The row is really in the database and the password is BCrypt-hashed
+
         AppUser stored = repository.findByUsername("teacher2").orElseThrow();
         assertNotEquals("secret123", stored.getPassword());
         assertTrue(passwordEncoder.matches("secret123", stored.getPassword()));
@@ -73,7 +73,7 @@ class ApiCrudIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.fullName").value("Dr. Rahman"));
 
-        // ---- UPDATE (password omitted -> old password is kept)
+        // ---- UPDATE
         mockMvc.perform(put("/api/teachers/" + id)
                         .with(httpBasic("admin", "admin123"))
                         .contentType(MediaType.APPLICATION_JSON)
